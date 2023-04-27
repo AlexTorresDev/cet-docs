@@ -11,7 +11,7 @@ const Navbar: FunctionComponent<{ navbarLinks: {text: string, link: string}[] }>
         {navbarLinks?.map(({ text, link }) => (
           <a
             className="navbar-link"
-            href={link}
+            href={`${import.meta.env.BASE_URL}${link}`}
             aria-label={text}
             key={text}
           >

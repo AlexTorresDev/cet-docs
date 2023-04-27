@@ -23,7 +23,7 @@ const sidebar = SIDEBAR[langCode];
 						<h2 class="nav-group-title">{header}</h2>
 						<ul>
 							{children.map((child) => {
-								const url = Astro.site?.pathname + child.link;
+								const url = Astro.site?.pathname + '/' + child.link;
 								return (
 									<li class="nav-link">
 										<a href={url} aria-current={currentPageMatch === child.link ? 'page' : false}>

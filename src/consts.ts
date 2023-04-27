@@ -36,29 +36,29 @@ export type Sidebar = Record<
 export const SIDEBAR: Sidebar = {
 	en: {
 		'First steps': [
-			{ text: 'Introducción', link: 'en/introduction' },
-			{ text: 'Page 2', link: 'en/page-2' },
-			{ text: 'Page 3', link: 'en/page-3' },
+			{ text: 'Introducción', link: 'en/docs/introduction' },
+			{ text: 'Page 2', link: 'en/docs/page-2' },
+			{ text: 'Page 3', link: 'en/docs/page-3' },
 		],
-		'Another Section': [{ text: 'Page 4', link: 'en/page-4' }],
+		'Another Section': [{ text: 'Page 4', link: 'en/docs/page-4' }],
 	},
 	es: {
 		'Primeros pasos': [
-			{ text: 'Introducción', link: 'es/introduction' },
-			{ text: 'Página 2', link: 'es/page-2' },
-			{ text: 'Página 3', link: 'es/page-3' },
+			{ text: 'Introducción', link: 'es/docs/introduction' },
+			{ text: 'Página 2', link: 'es/docs/page-2' },
+			{ text: 'Página 3', link: 'es/docs/page-3' },
 		],
-		'Otra sección': [{ text: 'Página 4', link: 'es/page-4' }],
+		'Otra sección': [{ text: 'Página 4', link: 'es/docs/page-4' }],
 	},
 };
 
 export const TOP_NAVIGATION = {
 	en: [
-		{ text: 'Docs', link: '/en/' },
+		{ text: 'Docs', link: 'en/docs/introduction' },
 		{ text: 'Community', link: COMMUNITY_INVITE_URL },
 	],
 	es: [
-		{ text: 'Docs', link: '/en/' },
+		{ text: 'Docs', link: 'es/docs/introduction' },
 		{ text: 'Comunidad', link: COMMUNITY_INVITE_URL },
 	],
 };

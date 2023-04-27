@@ -29,8 +29,9 @@ const LanguageSelect: FunctionComponent<{ lang: string }> = ({ lang }) => {
 				value={lang}
 				onChange={(e) => {
 					const newLang = e.target.value;
-					let actualDest = window.location.pathname.replace(langPathRegex, '/');
-					window.location.pathname = '/' + newLang + actualDest;
+					let actualDest = window.location.pathname.replace(import.meta.env.BASE_URL, '/')
+					actualDest = actualDest.replace(langPathRegex, '/');
+					window.location.pathname = import.meta.env.BASE_URL + newLang + actualDest;
 				}}
 			>
 				{Object.entries(KNOWN_LANGUAGES).map(([key, value]) => {

@@ -6,5 +6,8 @@
     "docsearch",
     "preact",
     "tailwindcss"
-  ]
+  ],
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": "file:///d%3A/Proyectos/Astro/cet-website/.github/workflows/deploy.yml"
+  }
 }
