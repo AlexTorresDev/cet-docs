@@ -1,0 +1,7 @@
+body {
+	@apply font-sans bg-gray-100 text-gray-900 dark:bg-neutral-800 dark:text-gray-50  min-h-screen;
+}
+
+.navbar-link {
+  @apply text-white mr-4 ml-4 2xl:mr-6 2xl:ml-6 cursor-pointer font-normal lg:font-medium hover:scale-110 transition duration-300;
+}
