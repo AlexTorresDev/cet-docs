@@ -1,0 +1,28 @@
+---
+import { CollectionEntry, getCollection } from "astro:content";
+import { getLanguageFromURL } from "../../languages";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const currentPage = Astro.url.pathname;
+const lang = getLanguageFromURL(currentPage);
+
+export async function getStaticPaths() {
+	const lang = await getCollection('lang');
+	return lang.map((entry) => ({
+		params: {
+			lang: entry.slug
+		},
+		props: entry,
+	}));
+}
+type Props = CollectionEntry<'lang'> & {
+	data: CollectionEntry<'lang'>["data"][];
+};
+const entry= Astro.props;
+const { ...data } = entry.data;
+const { Content } = await entry.render();
+---
+
+<BaseLayout dir={data.dir} lang={lang} title="" description="">
+	<Content />
+</BaseLayout>

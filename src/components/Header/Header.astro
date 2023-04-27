@@ -1,0 +1,89 @@
+---
+import { getLanguageFromURL, KNOWN_LANGUAGE_CODES } from "../../languages";
+import { TOP_NAVIGATION } from "../../consts";
+import { SITE } from "../../consts";
+import AstroLogo from "./AstroLogo.astro";
+import SkipToContent from "./SkipToContent.astro";
+import SidebarToggle from "./SidebarToggle";
+import LanguageSelect from "./LanguageSelect";
+import Search from "./Search";
+import Navbar from "./Nav";
+
+type Props = {
+	currentPage: string;
+};
+
+const { currentPage } = Astro.props;
+const lang = getLanguageFromURL(currentPage);
+const navbarLinks = TOP_NAVIGATION[lang];
+---
+
+<header
+	class="w-full h-16 flex flex-col justify-center items-center fixed z-40 lg:backdrop-blur-xl bg-neutral-300 bg-opacity-50 dark:bg-neutral-600 dark:bg-opacity-50"
+>
+	<SkipToContent />
+	<div
+		class="2xl:w-[1280px] xl:w-10/12 w-11/12 flex justify-between items-center relative"
+	>
+		<a class="navbar-link" href="/">
+			<div class="flex items-center grow basis-0">
+				<AstroLogo size={40} />
+				<div class="text-white font-['Inter'] font-bold text-xl">Logo</div>
+			</div>
+		</a>
+		<Navbar navbarLinks={navbarLinks} client:idle />
+
+		<div style="flex-grow: 1;"></div>
+		{
+			KNOWN_LANGUAGE_CODES.length > 1 && (
+				<LanguageSelect lang={lang} client:idle />
+			)
+		}
+		<div class="search-item">
+			<Search client:idle />
+		</div>
+	</div>
+	{/* Mobile navbar */}
+	{
+		/* isOpen && (
+				<div
+					class="flex flex-col mt-16 lg:hidden absolute top-4 left-0  bg-customDarkBg1 z-50 w-full 
+			items-center gap-10 pb-10 border-y border-solid border-customDarkBg3 pt-10
+			"
+				>
+					{navbarLinks.map(({ label, href, ariaLabel }) => (
+						<a
+							key={href}
+							class="navbar-link"
+							href={href}
+							onClick={() => setIsOpen(false)}
+							aria-label={ariaLabel}
+						>
+							{label}
+						</a>
+					))}
+				</div>
+			) */
+	}
+
+	<!-- <nav class="nav-wrapper" title="Top Navigation">
+		<div class="menu-toggle">
+			<SidebarToggle client:idle />
+		</div>
+		<div class="logo flex">
+			<a href="/">
+				<AstroLogo size={40} />
+				<h1>{SITE.title ?? "Documentation"}</h1>
+			</a>
+		</div>
+		<div style="flex-grow: 1;"></div>
+		{
+			KNOWN_LANGUAGE_CODES.length > 1 && (
+				<LanguageSelect lang={lang} client:idle />
+			)
+		}
+		<div class="search-item">
+			<Search client:idle />
+		</div>
+	</nav> -->
+</header>
