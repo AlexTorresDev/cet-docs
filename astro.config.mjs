@@ -7,6 +7,5 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
   integrations: [preact(), react(), tailwind()],
-  site: `https://alextorresdev.github.io/cet-docs`,
-  base: '/cet-docs/',
+  site: 'https://cet.alextrs.dev',
 });
