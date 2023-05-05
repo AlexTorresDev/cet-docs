@@ -1,64 +1,115 @@
 export const SITE = {
-	title: 'Documentation',
+	title: 'CET Docs',
 	description: 'Your website description.',
 	defaultLanguage: 'en',
 } as const;
 
 export const OPEN_GRAPH = {
 	image: {
-		src: '',
-		alt: '',
+		src: 'https://github.com/withastro/astro/blob/main/.github/assets/banner.png?raw=true',
+		alt:
+			'astro logo on a starry expanse of space,' +
+			' with a purple saturn-like planet floating in the right foreground',
 	},
-	twitter: '',
+	twitter: 'astrodotbuild',
 };
 
 export const KNOWN_LANGUAGES = {
-	English: 'en',
-	Spanish: 'es',
-} as const;
+	'English': 'en',
+	'Español': 'es',
+} as const
 export const KNOWN_LANGUAGE_CODES = Object.values(KNOWN_LANGUAGES);
 
 export const GITHUB_EDIT_URL = `https://github.com/AlexTorresDev/cet-docs/tree/main`;
 
-export const COMMUNITY_INVITE_URL = `https://astro.build/chat`;
-
 // See "Algolia" section of the README for more information.
 export const ALGOLIA = {
-	indexName: 'dev-cet',
-	appId: '5J85USWA0U',
-	apiKey: '4ff1a98bfe2815f5735328e88c4fe621',
+	indexName: 'XXXXXXXXXX',
+	appId: 'XXXXXXXXXX',
+	apiKey: 'XXXXXXXXXX',
 };
 
 export type Sidebar = Record<
 	(typeof KNOWN_LANGUAGE_CODES)[number],
-	Record<string, { text: string; link: string }[]>
+	Record<string, { icon?: string, text: string; link: string, tag?: string }[]>
 >;
 export const SIDEBAR: Sidebar = {
 	en: {
-		'First steps': [
-			{ text: 'Introducción', link: 'en/docs/introduction' },
-			{ text: 'Page 2', link: 'en/docs/page-2' },
-			{ text: 'Page 3', link: 'en/docs/page-3' },
+		'Header': [
+			{
+				icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="m12 16 4-5h-3V4h-2v7H8z"></path><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path></svg>',
+				text: 'Get Started',
+				link: 'en/docs/get-started'
+			},
+			/* 			{ text: 'Page 2', link: 'en/docs/page-2' },
+						{ text: 'Page 3', link: 'en/docs/page-3' }, */
 		],
-		'Another Section': [{ text: 'Page 4', link: 'en/docs/page-4' }],
+		/* 		'Another Section': [{ text: 'Page 4', link: 'en/docs/page-4' }], */
 	},
 	es: {
-		'Primeros pasos': [
-			{ text: 'Introducción', link: 'es/docs/introduction' },
-			{ text: 'Página 2', link: 'es/docs/page-2' },
-			{ text: 'Página 3', link: 'es/docs/page-3' },
+		'Header': [
+			{
+				icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="m12 16 4-5h-3V4h-2v7H8z"></path><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path></svg>',
+				text: 'Empezando',
+				link: 'es/docs/get-started'
+			},
+			/* { text: 'Pagina 2', link: 'es/docs/page-2' },
+			{ text: 'Pagina 3', link: 'es/docs/page-3' }, */
 		],
-		'Otra sección': [{ text: 'Página 4', link: 'es/docs/page-4' }],
+		/* 'Otra seccion': [{ text: 'Pagina 4', link: 'es/docs/page-4' }], */
 	},
 };
 
-export const TOP_NAVIGATION = {
-	en: [
-		{ text: 'Docs', link: 'en/docs/introduction' },
-		{ text: 'Community', link: COMMUNITY_INVITE_URL },
-	],
-	es: [
-		{ text: 'Docs', link: 'es/docs/introduction' },
-		{ text: 'Comunidad', link: COMMUNITY_INVITE_URL },
-	],
-};
+export const MENUS: Sidebar = {
+	en: {
+		'Navbar': [
+			{ text: 'Theme', link: '' },
+		],
+		'Right-Sidebar': [
+			{ text: 'On this page', link: '' },
+			{ text: 'Edit this page', link: '' }
+		]
+	},
+	es: {
+		'Navbar': [
+			{ text: 'Tema', link: '' },
+		],
+		'Right-Sidebar': [
+			{ text: 'En esta página', link: '' },
+			{ text: 'Editar esta página', link: '' }
+		]
+	},
+}
+
+
+export const themes = [
+	"light",
+	"dark",
+	"cupcake",
+	"bumblebee",
+	"emerald",
+	"corporate",
+	"synthwave",
+	"retro",
+	"cyberpunk",
+	"valentine",
+	"halloween",
+	"garden",
+	"forest",
+	"aqua",
+	"lofi",
+	"pastel",
+	"fantasy",
+	"wireframe",
+	"black",
+	"luxury",
+	"dracula",
+	"cmyk",
+	"autumn",
+	"business",
+	"acid",
+	"lemonade",
+	"night",
+	"coffee",
+	"winter",
+]

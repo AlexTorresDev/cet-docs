@@ -1,0 +1,50 @@
+:root {
+  /* DocSearch [Algolia] */
+  --docsearch-modal-background: hsl(var(--b2));
+  --docsearch-searchbox-focus-background: hsl(var(--b1));
+  --docsearch-footer-background: hsl(var(--b1));
+  --docsearch-text-color: hsl(var(--bc));
+  --docsearch-hit-background: hsl(var(--b1));
+  --docsearch-hit-shadow: none;
+  --docsearch-hit-color: hsl(var(--bc));
+  --docsearch-footer-shadow: none;
+  --docsearch-modal-shadow: none;
+  --docsearch-primary-color: hsl(var(--p));
+  --docsearch-logo-color: hsl(var(--s));
+}
+
+article p {
+  @apply text-base leading-7 mb-5 block;
+}
+
+article ul {
+  @apply mb-5;
+}
+
+.mockup-code pre:before {
+  @apply hidden;
+}
+
+article h1 {
+  @apply text-4xl font-bold mt-8 mb-6;
+}
+
+article h2 {
+  @apply text-3xl font-bold mt-8 mb-6;
+}
+
+article h3 {
+  @apply text-2xl font-bold mt-8 mb-6;
+}
+
+article h4 {
+  @apply text-xl font-bold mt-8 mb-6;
+}
+
+article h5 {
+  @apply text-lg font-bold mt-8 mb-6;
+}
+
+article h6 {
+  @apply text-base font-bold mt-8 mb-6;
+}

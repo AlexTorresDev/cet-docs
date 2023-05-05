@@ -1,11 +1,10 @@
 /** @jsxImportSource react */
 import { useState, useCallback, useRef } from 'react';
-import { ALGOLIA } from '../../consts';
-import '@docsearch/css';
-import './Search.css';
-
 import { createPortal } from 'react-dom';
+
 import * as docSearchReact from '@docsearch/react';
+import '@docsearch/css';
+import { ALGOLIA } from '../../consts';
 
 /** FIXME: This is still kinda nasty, but DocSearch is not ESM ready. */
 const DocSearchModal =
@@ -14,7 +13,7 @@ const useDocSearchKeyboardEvents =
 	docSearchReact.useDocSearchKeyboardEvents ||
 	(docSearchReact as any).default.useDocSearchKeyboardEvents;
 
-export default function Search() {
+export default function Search({ isMobile = false }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const searchButtonRef = useRef<HTMLButtonElement>(null);
 	const [initialQuery, setInitialQuery] = useState('');
@@ -45,24 +44,12 @@ export default function Search() {
 
 	return (
 		<>
-			<button type="button" ref={searchButtonRef} onClick={onOpen} className="flex w-40 border-solid rounded-sm border-cyan-50 border-2 py-1 px-2">
-				<svg width="24" height="24" fill="none">
-					<path
-						d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-						stroke="currentColor"
-						strokeWidth="2"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					/>
-				</svg>
-
-				<span>Search</span>
-
-				<span className="search-hint">
+			<button type="button" ref={searchButtonRef} onClick={onOpen} className={`items-center gap-3 input h-10 p-2 w-60 ${isMobile ? 'flex md:hidden bg-base-100 m-auto' : 'hidden md:flex bg-base-200'} focus:outline-none`}>
+				<span>🔍</span>
+				<span className='flex-1 text-left'>Search</span>
+				<span>
 					<span className="sr-only">Press </span>
-
-					<kbd>/</kbd>
-
+					<kbd className="kbd min-h-min min-w-min">/</kbd>
 					<span className="sr-only"> to search</span>
 				</span>
 			</button>

@@ -1,25 +1,23 @@
 ---
-import { CollectionEntry, getCollection } from 'astro:content';
-import MainLayout from '../../../layouts/MainLayout.astro';
-import { getLanguageFromURL } from '../../../languages';
-import { SITE } from '../../../consts';
+import { CollectionEntry, getCollection } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
-	const docs = await getCollection('docs');
+	const docs = await getCollection("docs");
 	return docs.map((entry) => ({
 		params: {
 			lang: entry.data.lang,
-			slug: entry.slug.replaceAll(`${entry.data.lang}/`, ''),
+			slug: entry.slug.replaceAll(`${entry.data.lang}/`, ""),
 		},
 		props: entry,
 	}));
 }
-type Props = CollectionEntry<'docs'>;
+type Props = CollectionEntry<"docs">;
 
 const post = Astro.props;
 const { Content, headings } = await post.render();
 ---
 
-<MainLayout headings={headings} {...post.data}>
+<BaseLayout headings={headings} isDocs {...post.data}>
 	<Content />
-</MainLayout>
+</BaseLayout>

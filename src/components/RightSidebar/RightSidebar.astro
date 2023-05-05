@@ -1,7 +1,12 @@
 ---
-import type { MarkdownHeading } from 'astro';
-import TableOfContents from './TableOfContents';
-import MoreMenu from './MoreMenu.astro';
+import type { MarkdownHeading } from "astro";
+import TableOfContents from "./TableOfContents";
+import MoreMenu from "./MoreMenu.astro";
+import { getLanguageFromURL } from "src/languages";
+import { MENUS } from "src/consts";
+
+const currentPage = Astro.url.pathname;
+const lang = getLanguageFromURL(currentPage);
 
 type Props = {
 	headings: MarkdownHeading[];
@@ -11,24 +16,16 @@ type Props = {
 const { headings, githubEditUrl } = Astro.props;
 ---
 
-<nav class="sidebar-nav" aria-labelledby="grid-right">
-	<div class="sidebar-nav-inner">
-		<TableOfContents client:media="(min-width: 50em)" headings={headings} />
-		<MoreMenu editHref={githubEditUrl} />
-	</div>
-</nav>
-
-<style>
-	.sidebar-nav {
-		width: 100%;
-		position: sticky;
-		top: 0;
-	}
-
-	.sidebar-nav-inner {
-		height: 100%;
-		padding: 0;
-		padding-top: var(--doc-padding);
-		overflow: auto;
-	}
-</style>
+<div>
+	<nav class="sticky top-20 hidden lg:block w-80 ml-8">
+		<TableOfContents
+			client:media="(min-width: 50em)"
+			headings={headings}
+			title={MENUS[lang]["Right-Sidebar"][0].text}
+		/>
+		<MoreMenu
+			editHref={githubEditUrl}
+			title={MENUS[lang]["Right-Sidebar"][1].text}
+		/>
+	</nav>
+</div>

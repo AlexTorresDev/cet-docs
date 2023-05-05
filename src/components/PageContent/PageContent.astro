@@ -1,51 +1,66 @@
 ---
-import type { MarkdownHeading } from 'astro';
-import MoreMenu from '../RightSidebar/MoreMenu.astro';
-import TableOfContents from '../RightSidebar/TableOfContents';
+import type { MarkdownHeading } from "astro";
+import MoreMenu from "../RightSidebar/MoreMenu.astro";
+import TableOfContents from "../RightSidebar/TableOfContents";
+import { getLanguageFromURL } from "src/languages";
+import { MENUS } from "src/consts";
+
+const currentPage = Astro.url.pathname;
+const lang = getLanguageFromURL(currentPage);
 
 type Props = {
 	title: string;
 	headings: MarkdownHeading[];
 	githubEditUrl: string;
+	isDocs: boolean;
 };
 
-const { title, headings, githubEditUrl } = Astro.props;
+const { title, headings, githubEditUrl, isDocs } = Astro.props;
 ---
 
-<article id="article" class="content">
-	<section class="main-section">
-		<h1 class="content-title" id="overview">{title}</h1>
-		<nav class="block sm:hidden">
-			<TableOfContents client:media="(max-width: 50em)" headings={headings} />
-		</nav>
+<article
+	class:list={["mx-auto", { "max-w-7xl": !isDocs, "max-w-2xl": isDocs }]}
+>
+	<section>
+		<h1 class="font-bold text-4xl mb-16">{title}</h1>
+
+		<div class="dropdown md:hidden mb-8 flex justify-end">
+			<button tabindex="0" class="btn gap-2">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-5 w-5"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					><path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M4 6h16M4 12h16M4 18h7"></path></svg
+				>
+				{MENUS[lang]["Right-Sidebar"][0].text}
+			</button>
+
+			<div
+				tabindex="0"
+				class="dropdown-content mt-3 shadow bg-base-100 rounded-md w-52 overflow-hidden"
+			>
+				<TableOfContents
+					client:media="(max-width: 50em)"
+					headings={headings}
+					title={MENUS[lang]["Right-Sidebar"][0].text}
+					showTitle={false}
+				/>
+			</div>
+		</div>
+
 		<slot />
 	</section>
+
 	<nav class="block sm:hidden">
-		<MoreMenu editHref={githubEditUrl} />
+		<MoreMenu
+			editHref={githubEditUrl}
+			title={MENUS[lang]["Right-Sidebar"][1].text}
+		/>
 	</nav>
 </article>
-
-<style>
-	.content {
-		padding: 0;
-		max-width: 75ch;
-		width: 100%;
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-	}
-
-	.content > section {
-		margin-bottom: 4rem;
-	}
-
-	.block {
-		display: block;
-	}
-
-	@media (min-width: 50em) {
-		.sm\:hidden {
-			display: none;
-		}
-	}
-</style>

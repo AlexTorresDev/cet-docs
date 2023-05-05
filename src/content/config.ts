@@ -17,11 +17,11 @@ const docs = defineCollection({
 	}),
 });
 
-const lang = defineCollection({
+const langs = defineCollection({
 	schema: z.object({
 		title: z.string().default(SITE.title),
 		description: z.string().default(SITE.description),
-		lang: z.literal('en').default(SITE.defaultLanguage),
+		lang: z.string().default(SITE.defaultLanguage),
 		dir: z.union([z.literal('ltr'), z.literal('rtl')]).default('ltr'),
 		image: z
 			.object({
@@ -33,5 +33,4 @@ const lang = defineCollection({
 	}),
 });
 
-
-export const collections = { docs, lang };
+export const collections = { docs, langs };
