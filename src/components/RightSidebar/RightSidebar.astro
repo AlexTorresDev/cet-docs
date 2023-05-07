@@ -1,31 +1,27 @@
 ---
 import type { MarkdownHeading } from "astro";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import TableOfContents from "./TableOfContents";
 import MoreMenu from "./MoreMenu.astro";
-import { getLanguageFromURL } from "src/languages";
-import { MENUS } from "src/consts";
 
-const currentPage = Astro.url.pathname;
-const lang = getLanguageFromURL(currentPage);
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 type Props = {
-	headings: MarkdownHeading[];
-	githubEditUrl: string;
+  headings: MarkdownHeading[];
+  githubEditUrl: string;
 };
 
 const { headings, githubEditUrl } = Astro.props;
 ---
 
 <div>
-	<nav class="sticky top-20 hidden lg:block w-80 ml-8">
-		<TableOfContents
-			client:media="(min-width: 50em)"
-			headings={headings}
-			title={MENUS[lang]["Right-Sidebar"][0].text}
-		/>
-		<MoreMenu
-			editHref={githubEditUrl}
-			title={MENUS[lang]["Right-Sidebar"][1].text}
-		/>
-	</nav>
+  <nav class="sticky top-[6.5rem] w-64 mr-8">
+    <TableOfContents
+      client:media="(min-width: 50em)"
+      headings={headings}
+      title={t("rightSidebar.tableOfContents")}
+    />
+    <MoreMenu editHref={githubEditUrl} />
+  </nav>
 </div>

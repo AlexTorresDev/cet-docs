@@ -41,8 +41,7 @@ const { title, description, image = "/social_img.webp" } = Astro.props;
 	document.addEventListener("DOMContentLoaded", () => {
 		Array.from(document.querySelectorAll("pre")).forEach((element) => {
 			element.removeAttribute("style");
-			element.classList.add("pl-6");
-			element.outerHTML = `<div class="mockup-code bg-base-300 mb-5 max-w-[17rem] sm:min-w-[30rem] md:max-w-none mx-auto">${element.outerHTML}</div>`;
+			element.outerHTML = `<div class="mockup-code">${element.outerHTML}</div>`;
 		});
 	});
 </script>

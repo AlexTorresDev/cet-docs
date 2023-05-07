@@ -1,26 +1,46 @@
 ---
-title: "Introduction"
-description: "Docs intro"
-lang: "en"
+title: "Install Custom Electron Titlebar in your project"
+description: "Installation instructions for Custom Electron Titlebar in your project"
+order: 1
 ---
 
-**Welcome to Astro!**
+## Installation
 
-This is the `docs` starter template. It contains all of the features that you need to build a Markdown-powered documentation site, including:
+How to install this library in your Electron project?
 
-- ✅ **Full Markdown support**
-- ✅ **Responsive mobile-friendly design**
-- ✅ **Sidebar navigation**
-- ✅ **Search (powered by Algolia)**
-- ✅ **Multi-language i18n**
-- ✅ **Automatic table of contents**
-- ✅ **Automatic list of contributors**
-- ✅ (and, best of all) **dark mode**
+```sh 
+npm i custom-electron-titlebar
+```
 
-## Getting Started
+## How to use?
 
-To get started with this theme, check out the `README.md` in your new project directory. It provides documentation on how to use and customize this template for your own project. Keep the README around so that you can always refer back to it as you build.
+In the main file of the project `main.js` or `index.js` import the library and call the `setupTitlebar` and `attachTitlebarToWindow` functions:
 
-Found a missing feature that you can't live without? Please suggest it [on our Discord](https://astro.build/chat) and even consider adding it yourself on GitHub! Astro is an open source project and contributions from developers like you are how we grow!
+```js
+const { setupTitlebar, attachTitlebarToWindow } = require('custom-electron-titlebar/main');
 
-Good luck out there, Astronaut. 🧑‍🚀
+// setup the titlebar main process
+setupTitlebar();
+
+function createWindow() {
+  // Create the browser window.
+  const mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    titleBarStyle: 'hidden',
+    //frame: false, // needed if process.versions.electron < 14
+    webPreferences: {
+      sandbox: false,
+      preload: path.join(__dirname, 'preload.js')
+    }
+  });
+  
+  ...
+
+  // attach fullscreen(f11 and not 'maximized') && focus listeners
+  attachTitlebarToWindow(mainWindow);
+}
+```
+
+It is important that the `titleBarStyle` property is `hidden` so that the default Electron title bar is not displayed.
+Likewise, the sandbox property must be added to false so that the library can function correctly.

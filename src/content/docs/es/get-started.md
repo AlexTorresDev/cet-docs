@@ -1,7 +1,7 @@
 ---
 title: "Instale Custom Electron Titlebar en su proyecto"
 description: "Instrucciones de instalación de Custom Electron Titlebar en su proyecto"
-lang: "es"
+order: 1
 ---
 
 ## Instalación
@@ -44,5 +44,3 @@ function createWindow() {
 
 Es importante que la propiedad `titleBarStyle` sea `hidden` para que no se muestre la barra de título predeterminada de Electron.
 Igualmente, se debe agregar la propiedad sandbox a false para que la librería pueda funcionar correctamente.
-
-

@@ -1,50 +1,31 @@
-:root {
-  /* DocSearch [Algolia] */
-  --docsearch-modal-background: hsl(var(--b2));
-  --docsearch-searchbox-focus-background: hsl(var(--b1));
-  --docsearch-footer-background: hsl(var(--b1));
-  --docsearch-text-color: hsl(var(--bc));
-  --docsearch-hit-background: hsl(var(--b1));
-  --docsearch-hit-shadow: none;
-  --docsearch-hit-color: hsl(var(--bc));
-  --docsearch-footer-shadow: none;
-  --docsearch-modal-shadow: none;
-  --docsearch-primary-color: hsl(var(--p));
-  --docsearch-logo-color: hsl(var(--s));
+.time-line-container>div:last-child .education__time>.education__line {
+    @apply hidden
 }
 
-article p {
-  @apply text-base leading-7 mb-5 block;
+.mockup-code {
+    @apply bg-base-200 mb-5 max-w-none min-w-[auto] border-solid border-[1px] border-base-300;
 }
 
-article ul {
-  @apply mb-5;
+.mockup-code:before {
+    @apply sticky left-0 text-base-content;
 }
 
-.mockup-code pre:before {
-  @apply hidden;
+article .mockup-code pre {
+    @apply !m-0 !p-0 !bg-transparent !rounded-none !overflow-x-visible !text-base;
 }
 
-article h1 {
-  @apply text-4xl font-bold mt-8 mb-6;
+article .mockup-code pre code {
+    @apply inline-block px-6;
 }
 
-article h2 {
-  @apply text-3xl font-bold mt-8 mb-6;
+article .mockup-code pre:before {
+    @apply hidden;
 }
 
-article h3 {
-  @apply text-2xl font-bold mt-8 mb-6;
+article .footnotes {
+    @apply text-base;
 }
 
-article h4 {
-  @apply text-xl font-bold mt-8 mb-6;
-}
-
-article h5 {
-  @apply text-lg font-bold mt-8 mb-6;
-}
-
-article h6 {
-  @apply text-base font-bold mt-8 mb-6;
+article .footnotes li p {
+    @apply !m-0;
 }

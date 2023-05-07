@@ -1,0 +1,30 @@
+---
+import { CollectionEntry, getCollection } from "astro:content";
+import { getLangFromUrl } from "@i18n/utils";
+import PostLayout from "@layouts/PostLayout.astro";
+
+export async function getStaticPaths() {
+    const postEntries = await getCollection("docs");
+
+    return postEntries.map((entry) => {
+        const [lang, ...slug] = entry.slug.split("/");
+
+        return {
+            params: { lang, slug: slug.join("/") || undefined },
+            props: { entry },
+        };
+    });
+}
+
+interface Props {
+    entry: CollectionEntry<"docs">;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const { entry } = Astro.props;
+const { Content, headings } = await entry.render();
+---
+
+<PostLayout id={entry.id} headings={headings} lang={lang} {...entry.data}>
+    <Content />
+</PostLayout>
