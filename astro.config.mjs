@@ -4,7 +4,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwind from "@astrojs/tailwind";
 import preact from "@astrojs/preact";
-
+import react from "@astrojs/react";
 const markdownConfig = {
   drafts: true,
   shikiConfig: {
@@ -25,5 +25,5 @@ export default defineConfig({
     serviceEntryPoint: '@astrojs/image/sharp',
     cacheDir: "./.cache/image",
     logLevel: 'debug'
-  })]
+  }), react()]
 });

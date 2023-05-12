@@ -1,14 +1,37 @@
 ---
+import Logo from "./Logo.astro";
 import ThemeSwitcher from "./ThemeSwitcher.astro";
+import LanguageSelect from "./LanguageSelect";
+import { getLangFromUrl } from "@i18n/utils";
+import { languages } from "@i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+
+type Props = {
+  isDocs?: boolean;
+};
+
+const { isDocs = false } = Astro.props;
 ---
 
 <header
-  class="sticky top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-all duration-100 bg-base-100 text-base-content shadow-sm"
+  class:list={[
+    "sticky top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-all duration-100 text-base-content",
+    { "shadow-sm bg-base-100": isDocs },
+  ]}
 >
   <div class="navbar">
-    <div class="navbar-start w-4/5 md:w-[inherit]"></div>
+    <div class="navbar-start w-4/5">
+      {!isDocs && <Logo />}
+    </div>
     <div class="navbar-center hidden lg:flex"></div>
-    <div class="navbar-end w-1/5 md:w-[inherit]">
+    <div class="navbar-end w-1/5 gap-3">
+      {
+        Object.entries(languages).length > 1 && (
+          <LanguageSelect lang={lang} client:idle />
+        )
+      }
+
       <ThemeSwitcher />
     </div>
   </div>

@@ -1,0 +1,10 @@
+---
+const { hex, name } = Astro.props;
+---
+
+<div class="flex items-center gap-2">
+  <span
+    class="w-5 h-5 rounded-md border-primary border-[1px] border-solid"
+    style={`background-color: #${hex};`}></span>
+  <code>{name}</code>
+</div>

@@ -1,6 +1,10 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 export async function getStaticPaths() {
   const posts = await getCollection("docs");
@@ -12,8 +16,69 @@ export async function getStaticPaths() {
     };
   });
 }
+
+const listFeatures = [
+  t("home.features.1"),
+  t("home.features.2"),
+  t("home.features.3"),
+  t("home.features.4"),
+  t("home.features.5"),
+];
 ---
 
 <BaseLayout>
-  <h1>My Page</h1>
+  <section>
+    <div class="px-4 lg:pl-10 lg:pb-32">
+      <div class="mb-2 py-4 text-center lg:py-10 lg:text-left">
+        <h1
+          class="font-title mb-2 text-4xl font-extrabold sm:text-5xl lg:text-6xl"
+        >
+          Custom Electron Titlebar
+        </h1>
+        <h2 class="font-title text-lg font-extrabold sm:text-xl lg:text-2xl">
+          {t("home.subtitle")}
+        </h2>
+      </div>
+      <div
+        class="flex w-full flex-col items-center space-y-10 lg:flex-row lg:items-start lg:space-x-4 lg:space-y-0"
+      >
+        <div class="my-2 flex max-w-sm flex-col gap-2 text-left">
+          {
+            listFeatures.map((item) => (
+              <>
+                <div class="flex gap-2">
+                  <svg
+                    width="20"
+                    height="20"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    class="inline-block h-6 w-6 stroke-current"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  {item}
+                </div>
+              </>
+            ))
+          }
+        </div>
+      </div>
+      <div
+        class="mt-4 flex flex-1 justify-center space-x-2 lg:mt-6 lg:justify-start"
+      >
+        <a
+          href={`/${lang}/docs`}
+          class="btn btn-ghost btn-active lg:btn-lg normal-case"
+        >
+          <span>{t("home.docs")}</span>
+        </a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>

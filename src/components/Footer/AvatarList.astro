@@ -6,17 +6,17 @@ const t = useTranslations(lang);
 
 // fetch all commits for just this page's path
 const resolvedPath = "AlexTorresDev/custom-electron-titlebar";
-const repoUrl = `https://github.com/${resolvedPath}`;
-const apiUrl = `https://api.github.com/repos/${resolvedPath}/commits`;
+const repoUrl = `https://github.com/${resolvedPath}/graphs/contributors`;
+const apiUrl = `https://api.github.com/repos/${resolvedPath}/contributors`;
 
-type Commit = {
-  author: {
-    id: string;
-    login: string;
-  };
+type Contributor = {
+  id: number;
+  login: string;
+  avatar_url: string;
+  html_url: string;
 };
 
-async function getCommits(url: string) {
+async function getContributors(url: string) {
   try {
     const token = import.meta.env.GITHUB_TOKEN ?? "hello";
     if (!token) {
@@ -44,33 +44,37 @@ async function getCommits(url: string) {
       );
     }
 
-    return data as Commit[];
+    return data as Contributor[];
   } catch (e) {
     console.warn(`[error]  /src/components/AvatarList.astro 
     ${(e as any)?.message ?? e}`);
-    return [] as Commit[];
+    return [] as Contributor[];
   }
 }
 
-function removeDups(arr: Commit[]) {
-  const map = new Map<string, Commit["author"]>();
+function removeDups(arr: Contributor[]) {
+  const map = new Map<number, Contributor>();
 
   for (let item of arr) {
-    const author = item.author;
+    const author = item;
     // Deduplicate based on author.id
-    map.set(author.id, { login: author.login, id: author.id });
+    map.set(author.id, {
+      id: author.id,
+      login: author.login,
+      avatar_url: author.avatar_url,
+      html_url: author.html_url,
+    });
   }
 
   return [...map.values()];
 }
 
-const data = await getCommits(apiUrl);
+const data = await getContributors(apiUrl);
 const unique = removeDups(data);
-const recentContributors = unique.slice(0, 5);
+const recentContributors = unique.slice(0, 6);
 const additionalContributors = unique.length - recentContributors.length;
 ---
 
-<!-- Thanks to @5t3ph for https://smolcss.dev/#smol-avatar-list! -->
 <div class="flex flex-col gap-3">
   <ul
     class="avatar-list grid"
@@ -81,14 +85,14 @@ const additionalContributors = unique.length - recentContributors.length;
         <li class="w-11 h-11">
           <a
             class="block rounded-full border-solid border-2 overflow-hidden transition-all duration-150 ease-in-out"
-            href={`https://github.com/${item.login}`}
+            href={`https://github.com/${item.html_url}`}
           >
             <img
-              alt={`Contributor ${item.login}`}
-              title={`Contributor ${item.login}`}
+              alt={item.login}
+              title={item.login}
               width="64"
               height="64"
-              src={`https://avatars.githubusercontent.com/u/${item.id}`}
+              src={item.avatar_url}
             />
           </a>
         </li>

@@ -1,0 +1,30 @@
+---
+title: "Colores"
+description: "Configuración de los colores de la barra de título"
+order: 4
+---
+
+import Color from "@components/Color.astro"
+
+Existe una clase llamada `TitlebarColor` que permite configurar los colores de la barra de título.
+
+## Colores predefinidos
+
+La clase `TitlebarColor` tiene varios colores predefinidos que se pueden usar para configurar los colores de la barra de título.
+
+<Color name="TitlebarColor.BLACK" hex="000000" />
+<Color name="TitlebarColor.BLUE" hex="0000FF" />
+<Color name="TitlebarColor.CYAN" hex="00FFFF" />
+<Color name="TitlebarColor.GREEN" hex="00FF00" />
+<Color name="TitlebarColor.LIGHTGREY" hex="D3D3D3" />
+<Color name="TitlebarColor.RED" hex="FF0000" />
+<Color name="TitlebarColor.WHITE" hex="FFFFFF" />
+<Color name="TitlebarColor.TRANSPARENT" hex="transparent" />
+
+## Crear un color personalizado
+
+Para crear un color personalizado, use el método estático `TitlebarColor.fromHex(color)`. Este método acepta un color hexadecimal como argumento y devuelve un objeto `TitlebarColor`.
+
+```js
+const customColor = TitlebarColor.fromHex('#FF0000')
+```

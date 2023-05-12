@@ -4,9 +4,8 @@ import { CollectionEntry, getCollection } from "astro:content";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import RightSidebar from "@components/RightSidebar/RightSidebar.astro";
 import TableOfContents from "@components/RightSidebar/TableOfContents";
-import { GITHUB_EDIT_URL } from "src/consts";
 import Navigation from "@components/Navigation.astro";
-import LeftSidebar from "@components/LeftSidebar.astro";
+import { GITHUB_EDIT_URL } from "src/consts";
 
 type Props = CollectionEntry<"docs">["data"] & {
   id: string;
@@ -23,7 +22,7 @@ const { id, lang, headings, title, description } = Astro.props;
 const entries = await getCollection("docs");
 
 const filteredEntries = entries.filter((entry) => entry.slug.startsWith(lang));
-filteredEntries.sort((a, b) => (a.data.order > b.data.order ? 1 : -1));
+filteredEntries.sort((a, b) => a.data.order - b.data.order);
 const index = filteredEntries.findIndex((p) => p.id === id);
 const pagination = {
   previous: filteredEntries[index + 1],

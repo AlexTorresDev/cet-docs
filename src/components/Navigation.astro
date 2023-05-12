@@ -1,5 +1,8 @@
 ---
 import { CollectionEntry } from "astro:content";
+import { getLangFromUrl } from "@i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
 
 export type Props = {
   previous: CollectionEntry<"docs">;
@@ -14,8 +17,11 @@ const show = previous || next;
 {
   show && (
     <div class="flex justify-between">
-      {previous ? (
-        <a href={`${previous.slug}`} class="btn btn-ghost my-10 mr-5 md:pl-1">
+      {next && next.slug.includes(lang) ? (
+        <a
+          href={`${next.slug.split("/")[1]}`}
+          class="btn btn-ghost my-10 mr-5 md:pl-1"
+        >
           <svg
             class="h-6 w-6 fill-current md:h-8 md:w-8"
             xmlns="http://www.w3.org/2000/svg"
@@ -25,14 +31,17 @@ const show = previous || next;
           >
             <path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
           </svg>
-          <span class="hidden md:inline">{previous.data.title}</span>
+          <span class="hidden md:inline">{next.data.title}</span>
         </a>
       ) : (
         <div />
       )}
-      {next ? (
-        <a href={next.slug} class="btn btn-ghost my-10 ml-5 md:pr-1">
-          <span class="hidden md:inline">{next.data.title}</span>
+      {previous && previous.slug.includes(lang) ? (
+        <a
+          href={previous.slug.split("/")[1]}
+          class="btn btn-ghost my-10 ml-5 md:pr-1"
+        >
+          <span class="hidden md:inline">{previous.data.title}</span>
           <svg
             class="h-6 w-6 fill-current md:h-8 md:w-8"
             xmlns="http://www.w3.org/2000/svg"
